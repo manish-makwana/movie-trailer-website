@@ -142,7 +142,7 @@ MOVIE_TILE_CONTENT = '''
 data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <img src="{poster_image_url}" width="220" height="342">
     <h2>{movie_title} ({year})</h2>
-    <h3>Rating: {rating}</h3>
+    <h3>Tomatometer: {rating}%</h3>
     <h3>Profit ratio: {profit_ratio}</h3>
 </div>
 '''

@@ -29,7 +29,7 @@ class Movie(object):
         year: Year the movie was released.
         poster_image: URL to an image of the movie's poster.
         trailer_youtube: URL to a youtube video of the official trailer.
-        rating: "Fresh" or "Rotten" according to the Rotten Tomatoes website.
+        rating: Rating (0-100%) according to the Rotten Tomatoes website.
         profit_ratio: revenue / profit - how much of a financial success it was.
     """
 
@@ -40,10 +40,7 @@ class Movie(object):
         self.year = year
         self.poster_image_url = poster_image
         self.trailer_youtube_url = trailer_youtube
-        if rating >= 60:
-            self.rating = "Fresh"
-        else:
-            self.rating = "Rotten"
+        self.rating = rating
         self.profit_ratio = round(revenue / budget, 2)
 
     def show_trailer(self):
@@ -90,7 +87,17 @@ def main():
         rating=87,
         budget=63,
         revenue=463.5)
-    movies = [interstellar, edge_of_tomorrow, bridge_of_spies, the_matrix]
+    argo = Movie(
+        movie_title="Argo",
+        year=2012,
+        poster_image=("https://a248.e.akamai.net/f/1015/2073/5m/"
+                      "blogs-images.forbes.com/markhughes/files/"
+                      "2014/01/Argo-Poster.jpg"),
+        trailer_youtube="https://www.youtube.com/watch?v=JW3WfSFgrVY",
+        rating=96,
+        budget=44.5,
+        revenue=232.3)
+    movies = [interstellar, edge_of_tomorrow, bridge_of_spies, the_matrix, argo]
     # Sort movies from oldest to newest.
     movies.sort(key=lambda x: x.year)
 
