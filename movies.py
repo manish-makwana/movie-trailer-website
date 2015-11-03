@@ -17,6 +17,7 @@ class Movie(object):
 
     Args:
         movie_title: Title of the movie.
+        year: Year the movie was released.
         poster_image: URL to an image of the movie's poster.
         trailer_youtube: URL to a youtube video of the official trailer.
         rating: Rating (0-100%) according to the Rotten Tomatoes website.
@@ -25,6 +26,7 @@ class Movie(object):
 
     Attributes:
         movie_title: Title of the movie.
+        year: Year the movie was released.
         poster_image: URL to an image of the movie's poster.
         trailer_youtube: URL to a youtube video of the official trailer.
         rating: "Fresh" or "Rotten" according to the Rotten Tomatoes website.
@@ -32,9 +34,10 @@ class Movie(object):
     """
 
     # Can't avoid lots of arguments. pylint: disable=too-many-arguments
-    def __init__(self, movie_title, poster_image, trailer_youtube,
-                 rating, budget, revenue):
+    def __init__(self, movie_title, year, poster_image,
+                 trailer_youtube, rating, budget, revenue):
         self.title = movie_title
+        self.year = year
         self.poster_image_url = poster_image
         self.trailer_youtube_url = trailer_youtube
         if rating >= 60:
@@ -53,6 +56,7 @@ def main():
     # Create a list of favourite movies, with relevant metadata loaded.
     interstellar = Movie(
         movie_title="Interstellar",
+        year=2014,
         poster_image=("http://fangirlnation.com/wp-content/"
                       "uploads/2014/10/interstellar-poster.jpg"),
         trailer_youtube="https://www.youtube.com/watch?v=zSWdZVtXT7E",
@@ -61,6 +65,7 @@ def main():
         revenue=675)
     edge_of_tomorrow = Movie(
         movie_title="Edge of Tomorrow",
+        year=2014,
         poster_image=("http://www.graffitiwithpunctuation.net/wp-content/"
                       "uploads/2014/06/Edge_of_Tomorrow_live-die-repeat.jpg"),
         trailer_youtube="https://www.youtube.com/watch?v=yUmSVcttXnI",
@@ -68,6 +73,8 @@ def main():
         budget=178,
         revenue=369.2)
     movies = [interstellar, edge_of_tomorrow]
+    # Sort movies from oldest to newest.
+    movies.sort(key=lambda x: x.year)
 
     # Generate an HTML file and load in the movie information.
     fresh_tomatoes.open_movies_page(movies)
