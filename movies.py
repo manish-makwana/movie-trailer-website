@@ -72,7 +72,25 @@ def main():
         rating=90,
         budget=178,
         revenue=369.2)
-    movies = [interstellar, edge_of_tomorrow]
+    bridge_of_spies = Movie(
+        movie_title="Bridge of Spies",
+        year=2015,
+        poster_image=("http://www.kinemamillennium.com/wp-content/"
+                      "uploads/2015/09/d2.jpg"),
+        trailer_youtube="https://www.youtube.com/watch?v=mBBuzHrZBro",
+        rating=92,
+        budget=40,
+        revenue=57.9)
+    the_matrix = Movie(
+        movie_title="The Matrix",
+        year=1999,
+        poster_image=("http://www.fatmovieguy.com/wp-content/uploads/"
+                      "2014/12/The-Matrix-Movie-Poster.jpg"),
+        trailer_youtube="https://www.youtube.com/watch?v=vKQi3bBA1y8",
+        rating=87,
+        budget=63,
+        revenue=463.5)
+    movies = [interstellar, edge_of_tomorrow, bridge_of_spies, the_matrix]
     # Sort movies from oldest to newest.
     movies.sort(key=lambda x: x.year)
 
