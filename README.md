@@ -39,3 +39,5 @@ LICENCE
 
 This program is released under the MIT Licence. See `LICENCE.md` for the
 full details.
+
+Note that the bulk of `rotten_tomatoes.py` was provided by Udacity, Inc.
