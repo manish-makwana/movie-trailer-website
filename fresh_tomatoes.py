@@ -1,10 +1,21 @@
+"""
+This module generates and launches an html page containing metadata and video
+links for a collection of favourite movies.
+
+Attributes:
+    MAIN_PAGE_HEAD: Header section of html file, including css.
+    MAIN_PAGE_CONTENT: Overall page rendering html.
+    MOVIE_TILE_CONTENT: Place where movie data is rendered in html.
+"""
+
+
 import webbrowser
 import os
 import re
 
 
 # Styles and scripting for the page
-main_page_head = '''
+MAIN_PAGE_HEAD = '''
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,10 +23,13 @@ main_page_head = '''
     <title>Fresh Tomatoes!</title>
 
     <!-- Bootstrap 3 -->
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href=
+    "https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href=
+    "https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src=
+    "https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <style type="text/css" media="screen">
         body {
             padding-top: 80px;
@@ -67,7 +81,8 @@ main_page_head = '''
         // Start playing the video whenever the trailer modal is opened
         $(document).on('click', '.movie-tile', function (event) {
             var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
-            var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
+            var sourceUrl = 'http://www.youtube.com/embed/' 
+                + trailerYouTubeId + '?autoplay=1&html5=1';
             $("#trailer-video-container").empty().append($("<iframe></iframe>", {
               'id': 'trailer-video',
               'type': 'text-html',
@@ -87,14 +102,15 @@ main_page_head = '''
 
 
 # The main page layout and title bar
-main_page_content = '''
+MAIN_PAGE_CONTENT = '''
   <body>
     <!-- Trailer Video Modal -->
     <div class="modal" id="trailer">
       <div class="modal-dialog">
         <div class="modal-content">
           <a href="#" class="hanging-close" data-dismiss="modal" aria-hidden="true">
-            <img src="https://lh5.ggpht.com/v4-628SilF0HtHuHdu5EzxD7WRqOrrTIDi_MhEG6_qkNtUK5Wg7KPkofp_VJoF7RS2LhxwEFCO1ICHZlc-o_=s0#w=24&h=24"/>
+            <img src=
+            "https://lh5.ggpht.com/v4-628SilF0HtHuHdu5EzxD7WRqOrrTIDi_MhEG6_qkNtUK5Wg7KPkofp_VJoF7RS2LhxwEFCO1ICHZlc-o_=s0#w=24&h=24"/>
           </a>
           <div class="scale-media" id="trailer-video-container">
           </div>
@@ -121,15 +137,23 @@ main_page_content = '''
 
 
 # A single movie entry html template
-movie_tile_content = '''
-<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
+MOVIE_TILE_CONTENT = '''
+<div class="col-md-6 col-lg-4 movie-tile text-center" 
+data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <img src="{poster_image_url}" width="220" height="342">
     <h2>{movie_title}</h2>
+    <h3>Rating: {rating}</h3>
+    <h3>Profit ratio: {profit_ratio}</h3>
 </div>
 '''
 
 
 def create_movie_tiles_content(movies):
+    """Extract metadata from supplied object list, and turn into HTML.
+
+    Args:
+        movies: list of objects of class Movie."""
+
     # The HTML content for this section of the page
     content = ''
     for movie in movies:
@@ -142,24 +166,31 @@ def create_movie_tiles_content(movies):
                               else None)
 
         # Append the tile for the movie with its content filled in
-        content += movie_tile_content.format(
+        content += MOVIE_TILE_CONTENT.format(
             movie_title=movie.title,
             poster_image_url=movie.poster_image_url,
-            trailer_youtube_id=trailer_youtube_id
+            trailer_youtube_id=trailer_youtube_id,
+            rating=movie.rating,
+            profit_ratio=movie.profit_ratio
         )
     return content
 
 
 def open_movies_page(movies):
+    """Open an HTML page of favourite movies.
+
+    Args:
+        movies: list of objects of class Movie."""
+
     # Create or overwrite the output file
     output_file = open('fresh_tomatoes.html', 'w')
 
     # Replace the movie tiles placeholder generated content
-    rendered_content = main_page_content.format(
+    rendered_content = MAIN_PAGE_CONTENT.format(
         movie_tiles=create_movie_tiles_content(movies))
 
     # Output the file
-    output_file.write(main_page_head + rendered_content)
+    output_file.write(MAIN_PAGE_HEAD + rendered_content)
     output_file.close()
 
     # open the output file in the browser (in a new tab, if possible)

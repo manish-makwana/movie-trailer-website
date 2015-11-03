@@ -15,13 +15,20 @@ class Movie(object):
     """
     Return an object with movie metadata.
 
-    Attributes:
+    Args:
         movie_title: Title of the movie.
         poster_image: URL to an image of the movie's poster.
         trailer_youtube: URL to a youtube video of the official trailer.
         rating: Rating (0-100%) according to the Rotten Tomatoes website.
         budget: The money spent making the film (in USD millions).
         revenue: The money earned worldwide from the movie (in USD millions).
+
+    Attributes:
+        movie_title: Title of the movie.
+        poster_image: URL to an image of the movie's poster.
+        trailer_youtube: URL to a youtube video of the official trailer.
+        rating: "Fresh" or "Rotten" according to the Rotten Tomatoes website.
+        profit_ratio: revenue / profit - how much of a financial success it was.
     """
 
     # Can't avoid lots of arguments. pylint: disable=too-many-arguments
@@ -34,10 +41,7 @@ class Movie(object):
             self.rating = "Fresh"
         else:
             self.rating = "Rotten"
-        if revenue - budget >= 0:
-            self.financial_success = True
-        else:
-            self.financial_success = False
+        self.profit_ratio = round(revenue / budget, 2)
 
     def show_trailer(self):
         """Open the film trailer in the system default web browser."""
