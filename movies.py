@@ -61,6 +61,7 @@ def main():
         rating=71,
         budget=165,
         revenue=675)
+
     edge_of_tomorrow = Movie(
         movie_title="Edge of Tomorrow",
         year=2014,
@@ -71,6 +72,7 @@ def main():
         rating=90,
         budget=178,
         revenue=369.2)
+
     bridge_of_spies = Movie(
         movie_title="Bridge of Spies",
         year=2015,
@@ -80,6 +82,7 @@ def main():
         rating=92,
         budget=40,
         revenue=57.9)
+
     the_matrix = Movie(
         movie_title="The Matrix",
         year=1999,
@@ -89,6 +92,7 @@ def main():
         rating=87,
         budget=63,
         revenue=463.5)
+
     argo = Movie(
         movie_title="Argo",
         year=2012,
@@ -99,8 +103,10 @@ def main():
         rating=96,
         budget=44.5,
         revenue=232.3)
+
     movies = [interstellar, edge_of_tomorrow,
               bridge_of_spies, the_matrix, argo]
+
     # Sort movies from oldest to newest.
     movies.sort(key=lambda x: x.year)
 
