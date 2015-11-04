@@ -30,7 +30,8 @@ class Movie(object):
         poster_image: URL to an image of the movie's poster.
         trailer_youtube: URL to a youtube video of the official trailer.
         rating: Rating (0-100%) according to the Rotten Tomatoes website.
-        profit_ratio: revenue / profit - how much of a financial success it was.
+        profit_ratio: revenue / profit - how much of a financial success
+        it was.
     """
 
     # Can't avoid lots of arguments. pylint: disable=too-many-arguments
@@ -64,7 +65,8 @@ def main():
         movie_title="Edge of Tomorrow",
         year=2014,
         poster_image=("http://www.graffitiwithpunctuation.net/wp-content/"
-                      "uploads/2014/06/Edge_of_Tomorrow_live-die-repeat.jpg"),
+                      "uploads/2014/06/"
+                      "Edge_of_Tomorrow_live-die-repeat.jpg"),
         trailer_youtube="https://www.youtube.com/watch?v=yUmSVcttXnI",
         rating=90,
         budget=178,
@@ -97,7 +99,8 @@ def main():
         rating=96,
         budget=44.5,
         revenue=232.3)
-    movies = [interstellar, edge_of_tomorrow, bridge_of_spies, the_matrix, argo]
+    movies = [interstellar, edge_of_tomorrow,
+              bridge_of_spies, the_matrix, argo]
     # Sort movies from oldest to newest.
     movies.sort(key=lambda x: x.year)
 
